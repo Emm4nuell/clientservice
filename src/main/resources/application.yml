@@ -4,3 +4,12 @@ server:
 spring:
   application:
     name: clientservice
+  datasource:
+    url: jdbc:h2:mem:devdb
+    driver-class-name: org.h2.Driver
+    username: devuser
+    password: devpassword
+  h2:
+    console:
+      enabled: true
+      path: /dev-h2-console
