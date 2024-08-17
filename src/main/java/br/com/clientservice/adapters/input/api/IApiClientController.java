@@ -16,7 +16,7 @@ public interface IApiClientController {
     ResponseEntity<Void> created(@RequestBody RequestClient requestClient);
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("clients/{id}")
+    @GetMapping("client/{id}")
     ResponseEntity<ResponseClient> findById(@PathVariable("id") Long id);
 
     @ResponseStatus(HttpStatus.OK)
@@ -26,4 +26,8 @@ public interface IApiClientController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("client/update/{id}")
     ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody RequestClient request);
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("client/delete/{id}")
+    ResponseEntity<Void> delete(@PathVariable("id") Long id);
 }

@@ -4,10 +4,7 @@ import br.com.clientservice.adapters.input.api.IApiClientController;
 import br.com.clientservice.adapters.input.api.request.RequestClient;
 import br.com.clientservice.adapters.input.api.response.ResponseClient;
 import br.com.clientservice.application.domain.model.ClientModel;
-import br.com.clientservice.application.port.in.ICreateClientUseCase;
-import br.com.clientservice.application.port.in.IFindAllClientUseCase;
-import br.com.clientservice.application.port.in.IFindByIdClientUseCase;
-import br.com.clientservice.application.port.in.IUpdateClientUseCase;
+import br.com.clientservice.application.port.in.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,6 +24,7 @@ public class ClientController implements IApiClientController {
     private final IFindByIdClientUseCase iFindByIdClientUseCase;
     private final IFindAllClientUseCase iFindAllClientUseCase;
     private final IUpdateClientUseCase iUpdateClientUseCase;
+    private final IDeleteClientUseCase iDeleteClientUseCase;
     private final ObjectMapper mapper;
 
     @Override
@@ -57,5 +55,11 @@ public class ClientController implements IApiClientController {
     public ResponseEntity<Void> update(Long id, RequestClient request) {
         iUpdateClientUseCase.execute(id, mapper.convertValue(request, ClientModel.class));
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @Override
+    public ResponseEntity<Void> delete(Long id) {
+        iDeleteClientUseCase.execute(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
