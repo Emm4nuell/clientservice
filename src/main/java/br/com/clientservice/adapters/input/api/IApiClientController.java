@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("v1/api/")
 public interface IApiClientController {
 
@@ -16,4 +18,8 @@ public interface IApiClientController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("clients/{id}")
     ResponseEntity<ResponseClient> findById(@PathVariable("id") Long id);
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("clients")
+    ResponseEntity<List<ResponseClient>> findAll();
 }
