@@ -2,10 +2,13 @@ package br.com.clientservice.adapters.input.controller;
 
 import br.com.clientservice.adapters.input.api.IApiClientController;
 import br.com.clientservice.adapters.input.api.request.RequestClient;
+import br.com.clientservice.adapters.input.api.response.ResponseClient;
 import br.com.clientservice.application.domain.model.ClientModel;
 import br.com.clientservice.application.port.in.ICreateClientUseCase;
+import br.com.clientservice.application.port.in.IFindByIdClientUseCase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,6 +20,7 @@ import java.net.URI;
 public class ClientController implements IApiClientController {
 
     private final ICreateClientUseCase iCreateClientUseCase;
+    private final IFindByIdClientUseCase iFindByIdClientUseCase;
     private final ObjectMapper mapper;
 
     @Override
@@ -28,5 +32,11 @@ public class ClientController implements IApiClientController {
                 .buildAndExpand(model.getId())
                 .toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @Override
+    public ResponseEntity<ResponseClient> findById(Long id) {
+        var response = mapper.convertValue(iFindByIdClientUseCase.execute(id), ResponseClient.class);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

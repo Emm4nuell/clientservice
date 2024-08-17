@@ -7,8 +7,8 @@ spring:
   datasource:
     url: jdbc:h2:mem:devdb
     driver-class-name: org.h2.Driver
-    username: devuser
-    password: devpassword
+    username: sa
+    password:
   h2:
     console:
       enabled: true
