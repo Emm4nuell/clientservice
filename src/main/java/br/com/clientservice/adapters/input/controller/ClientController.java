@@ -7,6 +7,7 @@ import br.com.clientservice.application.domain.model.ClientModel;
 import br.com.clientservice.application.port.in.ICreateClientUseCase;
 import br.com.clientservice.application.port.in.IFindAllClientUseCase;
 import br.com.clientservice.application.port.in.IFindByIdClientUseCase;
+import br.com.clientservice.application.port.in.IUpdateClientUseCase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public class ClientController implements IApiClientController {
     private final ICreateClientUseCase iCreateClientUseCase;
     private final IFindByIdClientUseCase iFindByIdClientUseCase;
     private final IFindAllClientUseCase iFindAllClientUseCase;
+    private final IUpdateClientUseCase iUpdateClientUseCase;
     private final ObjectMapper mapper;
 
     @Override
@@ -49,5 +51,11 @@ public class ClientController implements IApiClientController {
         var response = iFindAllClientUseCase.execute().stream()
                 .map(e -> mapper.convertValue(e, ResponseClient.class)).collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @Override
+    public ResponseEntity<Void> update(Long id, RequestClient request) {
+        iUpdateClientUseCase.execute(id, mapper.convertValue(request, ClientModel.class));
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

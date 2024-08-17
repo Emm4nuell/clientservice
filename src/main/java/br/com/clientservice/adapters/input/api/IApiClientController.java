@@ -22,4 +22,8 @@ public interface IApiClientController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("clients")
     ResponseEntity<List<ResponseClient>> findAll();
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("client/update/{id}")
+    ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody RequestClient request);
 }
