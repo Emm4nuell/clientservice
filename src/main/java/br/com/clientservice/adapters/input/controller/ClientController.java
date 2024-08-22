@@ -4,6 +4,7 @@ import br.com.clientservice.adapters.input.api.IApiClientController;
 import br.com.clientservice.adapters.input.api.request.RequestClient;
 import br.com.clientservice.adapters.input.api.response.ResponseClient;
 import br.com.clientservice.application.domain.model.ClientModel;
+import br.com.clientservice.application.domain.model.EnderecoModel;
 import br.com.clientservice.application.port.in.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,9 @@ public class ClientController implements IApiClientController {
 
     @Override
     public ResponseEntity<Void> created(RequestClient requestClient) {
-        var model = iCreateClientUseCase.execute(mapper.convertValue(requestClient, ClientModel.class));
+        var endereco = mapper.convertValue(requestClient.getEndereco_id(), EnderecoModel.class);
+        var client = mapper.convertValue(requestClient, ClientModel.class);
+        var model = iCreateClientUseCase.execute(client, endereco);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

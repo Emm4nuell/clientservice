@@ -13,3 +13,10 @@ spring:
     console:
       enabled: true
       path: /dev-h2-console
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000

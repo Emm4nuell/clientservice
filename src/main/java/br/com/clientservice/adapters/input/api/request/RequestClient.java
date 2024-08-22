@@ -21,4 +21,5 @@ public class RequestClient {
     private String telefone;
     private String celular;
     private String email;
+    private RequestEndereco endereco_id;
 }

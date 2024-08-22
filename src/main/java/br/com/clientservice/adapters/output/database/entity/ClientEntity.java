@@ -28,4 +28,5 @@ public class ClientEntity {
     private String celular;
     private String email;
     private LocalDateTime data_cadastro;
+    private Long id_endereco;
 }
