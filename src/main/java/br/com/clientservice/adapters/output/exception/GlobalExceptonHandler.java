@@ -101,6 +101,16 @@ public class GlobalExceptonHandler {
         ));
     }
 
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Map<String, Object>> handleRuntimeException(RuntimeException exception, HttpServletRequest request){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(createError(
+                HttpStatus.BAD_REQUEST,
+                "Error RuntimeExcepton",
+                exception.getMessage(),
+                request.getServletPath()
+        ));
+    }
+
     public Map<String, Object> createError(HttpStatus status, String mserror, String message, String path){
         Map<String, Object> error = new HashMap<>();
         error.put("timestamp", LocalDateTime.now());

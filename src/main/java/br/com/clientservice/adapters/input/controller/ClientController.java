@@ -30,9 +30,8 @@ public class ClientController implements IApiClientController {
 
     @Override
     public ResponseEntity<Void> created(RequestClient requestClient) {
-        var endereco = mapper.convertValue(requestClient.getEndereco_id(), EnderecoModel.class);
         var client = mapper.convertValue(requestClient, ClientModel.class);
-        var model = iCreateClientUseCase.execute(client, endereco);
+        var model = iCreateClientUseCase.execute(client);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

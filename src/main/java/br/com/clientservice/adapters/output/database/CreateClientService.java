@@ -20,7 +20,7 @@ public class CreateClientService implements ICreateClientService {
     @Override
     public ClientModel execute(ClientModel model) {
         var entity = mapper.convertValue(model, ClientEntity.class);
-        iClientRepository.save(null);
+        iClientRepository.save(entity);
         return mapper.convertValue(entity, ClientModel.class);
     }
 }

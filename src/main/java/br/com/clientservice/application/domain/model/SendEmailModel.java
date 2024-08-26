@@ -5,17 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class EnderecoModel {
-    private Long id;
-    private String rua;
-    private String numero;
-    private String cidade;
-    private String estado;
-    private String cep;
+public class SendEmailModel {
+    private String nome;
+    private String email;
 }
